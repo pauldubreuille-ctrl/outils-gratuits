@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calculez gratuitement la quantité de peinture nécessaire pour vos travaux.">
+  <title>Calculateur de peinture gratuit | MaisonClair</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #24352c;
+      background: #f6f7f2;
+    }
+    header {
+      padding: 22px 7%;
+      background: white;
+      border-bottom: 1px solid #e8ebe4;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    header span { color: #43845f; }
+    main {
+      max-width: 850px;
+      margin: 55px auto;
+      padding: 0 20px;
+    }
+    .intro { text-align: center; margin-bottom: 35px; }
+    .intro h1 { font-size: 34px; }
+    .intro p { color: #66736b; line-height: 1.6; }
+    .calculator {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 35px #1b33200d;
+    }
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #dce2da;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 16px;
+      border: 0;
+      border-radius: 9px;
+      background: #43845f;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #326a49; }
+    #result {
+      display: none;
+      margin-top: 25px;
+      padding: 22px;
+      background: #edf6ef;
+      border-radius: 12px;
+      text-align: center;
+    }
+    #result strong {
+      display: block;
+      font-size: 32px;
+      color: #326a49;
+      margin: 10px;
+    }
+    .note {
+      font-size: 13px;
+      color: #68756c;
+      line-height: 1.5;
+    }
+    footer {
+      text-align: center;
+      padding: 35px;
+      color: #78847b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>Maison<span>Clair</span></header>
+
+  <main>
+    <section class="intro">
+      <h1>Calculateur de peinture gratuit</h1>
+      <p>
+        Estimez facilement la quantité de peinture
+        nécessaire pour votre projet.
+        Gratuit, rapide et sans inscription.
+      </p>
+    </section>
+
+    <section class="calculator">
+      <h2>Calculez vos besoins</h2>
+
+      <label for="area">Surface totale à peindre (m²)</label>
+      <input id="area" type="number" min="0.1"
+        step="0.1" placeholder="Exemple : 45">
+
+      <label for="coats">Nombre de couches</label>
+      <input id="coats" type="number" min="1"
+        max="10" step="1" value="2">
+
+      <label for="coverage">
+        Rendement de la peinture (m² par litre)
+      </label>
+      <input id="coverage" type="number" min="0.1"
+        step="0.1" value="10">
+
+      <button onclick="calculate()">
+        Calculer ma quantité
+      </button>
+
+      <div id="result" aria-live="polite">
+        Vous aurez besoin d'environ
+        <strong id="liters">0 L</strong>
+        de peinture, marge de sécurité comprise.
+        <p class="note">
+          Estimation indicative avec une marge de 10 %.
+          Vérifiez toujours le rendement indiqué
+          sur votre pot de peinture.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    MaisonClair · Outils gratuits pour la maison
+  </footer>
+
+  <script>
+    function calculate() {
+      const area = Number(document.getElementById("area").value);
+      const coats = Number(document.getElementById("coats").value);
+      const coverage = Number(document.getElementById("coverage").value);
+
+      if (
+        !Number.isFinite(area) || area <= 0 ||
+        !Number.isInteger(coats) || coats < 1 || coats > 10 ||
+        !Number.isFinite(coverage) || coverage <= 0
+      ) {
+        alert("Veuillez vérifier les valeurs saisies.");
+        return;
+      }
+
+      const liters = (area * coats / coverage) * 1.10;
+      const rounded = Math.ceil(liters * 10) / 10;
+
+      document.getElementById("liters").textContent =
+        rounded.toFixed(1) + " L";
+
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
