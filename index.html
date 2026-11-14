@@ -3,165 +3,518 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Calculez gratuitement la quantité de peinture nécessaire pour vos travaux.">
-  <title>Calculateur de peinture gratuit | MaisonClair</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Outils Gratuits - Des outils pratiques en ligne</title>
+  <meta name="description" content="Découvrez des outils gratuits en ligne : calculateur de peinture, calculs pratiques, budget et productivité. Simples, rapides et accessibles à tous.">
+
+  <meta name="theme-color" content="#f5f7f2">
+
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --green: #26734d;
+      --green-dark: #185638;
+      --green-light: #e8f3eb;
+      --text: #202923;
+      --muted: #66736a;
+      --background: #f5f7f2;
+      --white: #ffffff;
+      --border: #e3e9e2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: #24352c;
-      background: #f6f7f2;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.6;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
     header {
-      padding: 22px 7%;
-      background: white;
-      border-bottom: 1px solid #e8ebe4;
-      font-size: 22px;
-      font-weight: bold;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
     }
-    header span { color: #43845f; }
-    main {
-      max-width: 850px;
-      margin: 55px auto;
-      padding: 0 20px;
+
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
-    .intro { text-align: center; margin-bottom: 35px; }
-    .intro h1 { font-size: 34px; }
-    .intro p { color: #66736b; line-height: 1.6; }
-    .calculator {
-      background: white;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 8px 35px #1b33200d;
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--green);
     }
-    label {
-      display: block;
-      margin: 18px 0 8px;
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 14px;
       font-weight: 600;
     }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      padding: 76px 20px 65px;
+      text-align: center;
+      background: linear-gradient(135deg, #e9f4eb, #f7f8f3);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 13px;
+      border-radius: 30px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 20px auto 14px;
+      font-size: clamp(32px, 5vw, 49px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 0 auto 26px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .main-button {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 9px;
+      color: white;
+      background: var(--green);
+      font-weight: 700;
+    }
+
+    .main-button:hover {
+      background: var(--green-dark);
+    }
+
+    section {
+      padding: 55px 0;
+    }
+
+    .section-title {
+      margin-bottom: 8px;
+      font-size: 29px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-description {
+      margin-top: 0;
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .category {
+      padding: 23px;
+      min-height: 175px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .category-icon {
+      font-size: 30px;
+    }
+
+    .category h3 {
+      margin: 12px 0 5px;
+      font-size: 18px;
+    }
+
+    .category p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tool-section {
+      background: #edf2ec;
+    }
+
+    .calculator {
+      max-width: 620px;
+      margin: 25px auto 0;
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    }
+
+    .calculator h3 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    .field {
+      margin: 18px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
     input {
       width: 100%;
-      padding: 14px;
-      border: 1px solid #dce2da;
-      border-radius: 9px;
+      padding: 13px;
+      border: 1px solid #ccd6cc;
+      border-radius: 8px;
       font-size: 16px;
+      background: white;
     }
-    button {
-      margin-top: 25px;
+
+    input:focus {
+      outline: 2px solid #a4cfb1;
+      border-color: var(--green);
+    }
+
+    .calculate-button {
       width: 100%;
-      padding: 16px;
+      margin-top: 10px;
+      padding: 14px;
       border: 0;
       border-radius: 9px;
-      background: #43845f;
+      background: var(--green);
       color: white;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
     }
-    button:hover { background: #326a49; }
-    #result {
+
+    .calculate-button:hover {
+      background: var(--green-dark);
+    }
+
+    .result {
       display: none;
-      margin-top: 25px;
-      padding: 22px;
-      background: #edf6ef;
-      border-radius: 12px;
+      margin-top: 20px;
+      padding: 17px;
+      border-radius: 10px;
+      background: var(--green-light);
+      color: var(--green-dark);
       text-align: center;
     }
-    #result strong {
+
+    .result strong {
       display: block;
-      font-size: 32px;
-      color: #326a49;
-      margin: 10px;
+      margin-top: 5px;
+      font-size: 30px;
     }
-    .note {
-      font-size: 13px;
-      color: #68756c;
-      line-height: 1.5;
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      color: #b42318;
+      font-weight: 600;
     }
+
+    .faq {
+      max-width: 760px;
+    }
+
+    .faq-item {
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+
     footer {
+      padding: 30px 0;
+      background: #202923;
+      color: white;
       text-align: center;
-      padding: 35px;
-      color: #78847b;
+    }
+
+    footer p {
+      margin: 5px 0;
+      color: #d1dbd3;
       font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .navbar {
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 55px 12px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator {
+        padding: 20px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header>Maison<span>Clair</span></header>
+
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#">Outils Gratuits</a>
+
+      <nav aria-label="Navigation principale">
+        <a href="#categories">Catégories</a>
+        <a href="#outils">Nos outils</a>
+        <a href="#faq">Questions</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
-    <section class="intro">
-      <h1>Calculateur de peinture gratuit</h1>
-      <p>
-        Estimez facilement la quantité de peinture
-        nécessaire pour votre projet.
-        Gratuit, rapide et sans inscription.
-      </p>
-    </section>
 
-    <section class="calculator">
-      <h2>Calculez vos besoins</h2>
+    <section class="hero">
+      <div class="container">
+        <span class="tag">100 % gratuit et simple</span>
 
-      <label for="area">Surface totale à peindre (m²)</label>
-      <input id="area" type="number" min="0.1"
-        step="0.1" placeholder="Exemple : 45">
+        <h1>Les outils pratiques dont tu as besoin, gratuitement.</h1>
 
-      <label for="coats">Nombre de couches</label>
-      <input id="coats" type="number" min="1"
-        max="10" step="1" value="2">
-
-      <label for="coverage">
-        Rendement de la peinture (m² par litre)
-      </label>
-      <input id="coverage" type="number" min="0.1"
-        step="0.1" value="10">
-
-      <button onclick="calculate()">
-        Calculer ma quantité
-      </button>
-
-      <div id="result" aria-live="polite">
-        Vous aurez besoin d'environ
-        <strong id="liters">0 L</strong>
-        de peinture, marge de sécurité comprise.
-        <p class="note">
-          Estimation indicative avec une marge de 10 %.
-          Vérifiez toujours le rendement indiqué
-          sur votre pot de peinture.
+        <p>
+          Des calculateurs et des outils en ligne pour te faire gagner
+          du temps au quotidien. Pas d'installation nécessaire.
         </p>
+
+        <a class="main-button" href="#outils">Découvrir les outils</a>
       </div>
     </section>
+
+    <section id="categories">
+      <div class="container">
+        <h2 class="section-title">Explore nos catégories</h2>
+
+        <p class="section-description">
+          Retrouve facilement l'outil dont tu as besoin.
+        </p>
+
+        <div class="grid">
+
+          <a class="category" href="#outils">
+            <div class="category-icon">🧮</div>
+            <h3>Calculs</h3>
+            <p>Des calculateurs simples pour tes besoins quotidiens.</p>
+          </a>
+
+          <a class="category" href="#outils">
+            <div class="category-icon">🏠</div>
+            <h3>Maison</h3>
+            <p>Des outils pour tes travaux et ton logement.</p>
+          </a>
+
+          <a class="category" href="#outils">
+            <div class="category-icon">💶</div>
+            <h3>Finance</h3>
+            <p>Des outils pour mieux gérer ton budget.</p>
+          </a>
+
+          <a class="category" href="#outils">
+            <div class="category-icon">⚡</div>
+            <h3>Productivité</h3>
+            <p>Des outils pour gagner du temps.</p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-section" id="outils">
+      <div class="container">
+        <h2 class="section-title">Nos outils gratuits</h2>
+
+        <p class="section-description">
+          Commence avec notre premier calculateur.
+          D'autres outils seront ajoutés progressivement.
+        </p>
+
+        <div class="calculator">
+          <h3>🎨 Calculateur de peinture</h3>
+
+          <p>
+            Calcule la quantité de peinture nécessaire pour tes travaux.
+          </p>
+
+          <div class="field">
+            <label for="surface">Surface totale à peindre (m²)</label>
+            <input id="surface" type="number" min="0.1" step="0.1" value="50">
+          </div>
+
+          <div class="field">
+            <label for="coats">Nombre de couches</label>
+            <input id="coats" type="number" min="1" max="10" step="1" value="2">
+          </div>
+
+          <div class="field">
+            <label for="coverage">Rendement de la peinture (m² par litre)</label>
+            <input id="coverage" type="number" min="0.1" step="0.1" value="10">
+          </div>
+
+          <button class="calculate-button" id="calculate" type="button">
+            Calculer la quantité
+          </button>
+
+          <p class="error" id="error" role="alert"></p>
+
+          <div class="result" id="result" aria-live="polite">
+            Quantité de peinture estimée :
+            <strong id="litres">11 litres</strong>
+            Marge de sécurité de 10 % incluse.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container faq">
+        <h2 class="section-title">Questions fréquentes</h2>
+
+        <div class="faq-item">
+          <h3>Les outils sont-ils gratuits ?</h3>
+          <p>
+            Oui, les outils proposés sur ce site sont accessibles
+            gratuitement.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Faut-il créer un compte ?</h3>
+          <p>
+            Non, tu peux utiliser le calculateur de peinture directement,
+            sans inscription.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Comment sont calculés les résultats ?</h3>
+          <p>
+            Les calculs sont réalisés directement dans ton navigateur.
+            Pour la peinture, une marge de sécurité de 10 % est ajoutée.
+          </p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    MaisonClair · Outils gratuits pour la maison
+    <div class="container">
+      <strong>Outils Gratuits</strong>
+      <p>Des outils simples pour faciliter ton quotidien.</p>
+      <p>© <span id="year"></span> Outils Gratuits. Tous droits réservés.</p>
+    </div>
   </footer>
 
   <script>
-    function calculate() {
-      const area = Number(document.getElementById("area").value);
-      const coats = Number(document.getElementById("coats").value);
-      const coverage = Number(document.getElementById("coverage").value);
+    const surfaceInput = document.getElementById("surface");
+    const coatsInput = document.getElementById("coats");
+    const coverageInput = document.getElementById("coverage");
+    const calculateButton = document.getElementById("calculate");
+    const result = document.getElementById("result");
+    const litres = document.getElementById("litres");
+    const error = document.getElementById("error");
+
+    calculateButton.addEventListener("click", function () {
+      const surface = Number(surfaceInput.value);
+      const coats = Number(coatsInput.value);
+      const coverage = Number(coverageInput.value);
+
+      result.style.display = "none";
+      error.style.display = "none";
 
       if (
-        !Number.isFinite(area) || area <= 0 ||
+        !Number.isFinite(surface) || surface <= 0 ||
         !Number.isInteger(coats) || coats < 1 || coats > 10 ||
         !Number.isFinite(coverage) || coverage <= 0
       ) {
-        alert("Veuillez vérifier les valeurs saisies.");
+        error.textContent =
+          "Vérifie les valeurs : surface et rendement positifs, et nombre de couches entre 1 et 10.";
+        error.style.display = "block";
         return;
       }
 
-      const liters = (area * coats / coverage) * 1.10;
-      const rounded = Math.ceil(liters * 10) / 10;
+      const quantity = (surface * coats / coverage) * 1.10;
+      const roundedQuantity = Math.ceil(quantity * 10) / 10;
 
-      document.getElementById("liters").textContent =
-        rounded.toFixed(1) + " L";
+      litres.textContent = roundedQuantity.toLocaleString("fr-FR") + " litres";
+      result.style.display = "block";
+    });
 
-      document.getElementById("result").style.display = "block";
-    }
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
   </script>
+
 </body>
 </html>
