@@ -433,11 +433,63 @@
             <strong id="litres">11 litres</strong>
             Marge de sécurité de 10 % incluse.
           </div>
+     
+        </div>
+
+        <div class="calculator">
+          <h3>💶 Calculateur de budget mensuel</h3>
+          <p>Calcule combien il te reste chaque mois après tes dépenses.</p>
+
+          <div class="field">
+            <label for="income">Revenus mensuels (€)</label>
+            <input id="income" type="number" min="0" step="0.01" placeholder="Exemple : 2200">
+          </div>
+
+          <div class="field">
+            <label for="rent">Loyer ou crédit immobilier (€)</label>
+            <input id="rent" type="number" min="0" step="0.01" value="700">
+          </div>
+
+          <div class="field">
+            <label for="bills">Factures (€)</label>
+            <input id="bills" type="number" min="0" step="0.01" value="150">
+          </div>
+
+          <div class="field">
+            <label for="food">Courses (€)</label>
+            <input id="food" type="number" min="0" step="0.01" value="300">
+          </div>
+
+          <div class="field">
+            <label for="transport">Transports (€)</label>
+            <input id="transport" type="number" min="0" step="0.01" value="100">
+          </div>
+
+          <div class="field">
+            <label for="other">Autres dépenses (€)</label>
+            <input id="other" type="number" min="0" step="0.01" value="100">
+          </div>
+
+          <button class="calculate-button" id="budgetCalculate" type="button">
+            Calculer mon budget
+          </button>
+
+          <p class="error" id="budgetError" role="alert"></p>
+
+          <div class="result" id="budgetResult" aria-live="polite">
+            Total des dépenses :
+            <strong id="totalExpenses"></strong>
+            Argent restant :
+            <strong id="remaining"></strong>
+            Part des revenus dépensée :
+            <strong id="spentPercentage"></strong>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="faq">
+
       <div class="container faq">
         <h2 class="section-title">Questions fréquentes</h2>
 
@@ -509,6 +561,56 @@
       const roundedQuantity = Math.ceil(quantity * 10) / 10;
 
       litres.textContent = roundedQuantity.toLocaleString("fr-FR") + " litres";
+      result.style.display = "block";
+    });
+
+    document.getElementById("budgetCalculate").addEventListener("click", function () {
+      const income = Number(document.getElementById("income").value);
+      const fields = ["rent", "bills", "food", "transport", "other"];
+
+      const expenses = fields.map(id => {
+        return Number(document.getElementById(id).value);
+      });
+
+      const error = document.getElementById("budgetError");
+      const result = document.getElementById("budgetResult");
+
+      error.style.display = "none";
+      result.style.display = "none";
+
+      const validIncome =
+        document.getElementById("income").value.trim() !== "" &&
+        Number.isFinite(income) && income > 0;
+
+      const validExpenses = fields.every((id, index) => {
+        const value = document.getElementById(id).value;
+        return value.trim() !== "" &&
+          Number.isFinite(expenses[index]) &&
+          expenses[index] >= 0;
+      });
+
+      if (!validIncome || !validExpenses) {
+        error.textContent = "Indique des revenus supérieurs à zéro et des dépenses positives ou nulles.";
+        error.style.display = "block";
+        return;
+      }
+
+      const total = expenses.reduce((sum, value) => sum + value, 0);
+      const remainingAmount = income - total;
+      const percentage = (total / income) * 100;
+
+      const money = value => value.toLocaleString("fr-FR", {
+        style: "currency",
+        currency: "EUR"
+      });
+
+      document.getElementById("totalExpenses").textContent = money(total);
+      document.getElementById("remaining").textContent = money(remainingAmount);
+      document.getElementById("spentPercentage").textContent =
+        percentage.toLocaleString("fr-FR", {
+          maximumFractionDigits: 1
+        }) + " %";
+
       result.style.display = "block";
     });
 
