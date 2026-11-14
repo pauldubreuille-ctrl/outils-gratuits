@@ -2,704 +2,500 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Outils Gratuits : découvrez des calculateurs gratuits pour votre budget, votre maison, vos économies et votre quotidien. Simples, rapides et sans inscription.">
-  <meta name="theme-color" content="#f7f8fc">
-  <title>Outils Gratuits – Tous vos calculateurs gratuits</title>
-  <style>
-    :root {
-      --bg: #f7f8fc;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #68738a;
-      --primary: #5855e7;
-      --primary-dark: #4542c9;
-      --border: #e8eaf1;
-      --green: #13865c;
-      --shadow: 0 12px 35px rgba(31, 41, 75, .07);
-      --radius: 18px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f8fc">
+<meta name="description" content="Découvrez des outils gratuits en ligne : calculateurs de budget, finance, travaux, carburant, électricité, conversions et bien plus.">
+<title>Outils Gratuits – Calculateurs et outils en ligne</title>
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-    button, input, select { font: inherit; }
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(1120px, calc(100% - 36px)); margin: auto; }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .logo { font-size: 21px; font-weight: 850; letter-spacing: -.8px; }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: 14px; }
-    .nav-links a:hover { color: var(--primary); }
-
-    .hero {
-      padding: 76px 0 52px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 15% 20%, rgba(100,95,240,.12), transparent 42%),
-        radial-gradient(ellipse at 85% 10%, rgba(36,190,151,.10), transparent 38%);
-    }
-    .eyebrow {
-      display: inline-block;
-      padding: 7px 13px;
-      border-radius: 30px;
-      background: #eeedff;
-      color: var(--primary-dark);
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-    }
-    h1 {
-      max-width: 760px;
-      margin: 20px auto 14px;
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1.1;
-      letter-spacing: -2px;
-    }
-    .hero p { max-width: 620px; margin: auto; color: var(--muted); font-size: 17px; }
-    .search-wrap { max-width: 580px; margin: 30px auto 0; position: relative; }
-    .search-wrap input {
-      width: 100%;
-      padding: 17px 20px 17px 50px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      outline: none;
-      box-shadow: var(--shadow);
-    }
-    .search-wrap input:focus { border-color: var(--primary); }
-    .search-icon { position: absolute; left: 18px; top: 13px; font-size: 21px; }
-
-    main { padding: 35px 0 75px; }
-    .section-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    h2 { font-size: 25px; letter-spacing: -.7px; margin: 0; }
-    .muted { color: var(--muted); font-size: 14px; }
-
-    .filters { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 25px; }
-    .filter {
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--muted);
-      border-radius: 30px;
-      padding: 9px 16px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 650;
-    }
-    .filter.active, .filter:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: white;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-    .tool-card {
-      display: block;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      transition: transform .2s, box-shadow .2s, border-color .2s;
-    }
-    .tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-      border-color: #c9c7ff;
-    }
-    .tool-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      background: #f0efff;
-      border-radius: 13px;
-      font-size: 23px;
-      margin-bottom: 15px;
-    }
-    .tool-card h3 { margin: 0 0 6px; font-size: 17px; }
-    .tool-card p { margin: 0; color: var(--muted); font-size: 13px; }
-    .tool-link { display: inline-block; margin-top: 15px; color: var(--primary); font-size: 13px; font-weight: 750; }
-    .no-results { display: none; color: var(--muted); padding: 20px 0; }
-
-    .calculators { margin-top: 70px; }
-    .calculator {
-      scroll-margin-top: 95px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 28px;
-      margin-top: 22px;
-      box-shadow: 0 5px 20px rgba(31,41,75,.035);
-    }
-    .calculator-header { margin-bottom: 23px; }
-    .calculator-header h3 { font-size: 21px; margin: 0 0 5px; }
-    .calculator-header p { color: var(--muted); font-size: 14px; margin: 0; }
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 17px; }
-    .field { display: flex; flex-direction: column; gap: 7px; }
-    .field label { font-size: 13px; font-weight: 700; }
-    .field input, .field select {
-      width: 100%;
-      padding: 12px 13px;
-      border: 1px solid var(--border);
-      background: #fbfcff;
-      border-radius: 10px;
-      outline: none;
-      color: var(--text);
-    }
-    .field input:focus, .field select:focus { border-color: var(--primary); }
-    .actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 19px;
-      background: var(--primary);
-      color: white;
-      font-weight: 750;
-      cursor: pointer;
-    }
-    .btn:hover { background: var(--primary-dark); }
-    .btn.secondary { background: #f0efff; color: var(--primary-dark); }
-    .result {
-      display: none;
-      margin-top: 20px;
-      background: #f0faf5;
-      border: 1px solid #d6efe2;
-      border-radius: 13px;
-      padding: 17px;
-      color: #126343;
-    }
-    .result strong { display: block; font-size: 24px; margin-top: 3px; }
-    .result small { display: block; margin-top: 5px; color: #39745e; }
-    .error { color: #b42318; font-size: 13px; margin-top: 10px; }
-
-    .info-section {
-      margin-top: 65px;
-      padding: 28px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-    .info-section h2 { margin-bottom: 12px; }
-    .info-section p { color: var(--muted); font-size: 14px; }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-    footer a { margin: 0 8px; }
-    footer a:hover { color: var(--primary); }
-
-    @media (max-width: 800px) {
-      .tools-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-links { gap: 12px; }
-    }
-    @media (max-width: 560px) {
-      .nav { min-height: 62px; }
-      .nav-links { display: none; }
-      .hero { padding: 53px 0 38px; }
-      .hero p { font-size: 15px; }
-      .tools-grid, .form-grid { grid-template-columns: 1fr; }
-      .calculator { padding: 20px; }
-      .section-heading { align-items: start; flex-direction: column; }
-      h1 { letter-spacing: -1.3px; }
-    }
-  </style>
+<style>
+:root {
+  --bg:#f7f8fc;
+  --surface:#ffffff;
+  --text:#172033;
+  --muted:#687386;
+  --primary:#635bff;
+  --primary-dark:#5048e5;
+  --border:#e8eaf1;
+  --green:#13845b;
+  --shadow:0 8px 28px rgba(28,35,65,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.container{width:min(1160px,92%);margin:auto}
+header{
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(12px);
+}
+.nav{
+  min-height:72px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.logo{font-size:21px;font-weight:850;letter-spacing:-.8px}
+.logo span{color:var(--primary)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:14px;color:var(--muted);font-weight:600}
+.nav-links a:hover{color:var(--primary)}
+.menu-button{display:none;border:1px solid var(--border);background:white;border-radius:10px;padding:9px}
+.hero{
+  padding:78px 0 58px;
+  background:linear-gradient(135deg,#f0efff 0%,#f8f9ff 52%,#eef8ff 100%);
+}
+.hero-content{max-width:760px;margin:auto;text-align:center}
+.eyebrow{
+  display:inline-block;background:#e8e7ff;color:#5148df;
+  border-radius:30px;padding:8px 14px;font-size:12px;font-weight:800;
+}
+h1{font-size:clamp(34px,5vw,55px);line-height:1.1;letter-spacing:-2px;margin:22px 0 16px}
+.hero p{color:var(--muted);font-size:17px;line-height:1.7;margin:0 auto 28px}
+.search-wrap{max-width:620px;margin:auto;position:relative}
+.search-wrap input{
+  width:100%;height:58px;padding:0 20px 0 48px;
+  border:1px solid var(--border);border-radius:15px;
+  background:white;box-shadow:var(--shadow);outline:none;
+}
+.search-wrap input:focus{border-color:var(--primary)}
+.search-icon{position:absolute;left:17px;top:17px;font-size:20px}
+.section{padding:55px 0}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:25px}
+.section-heading h2{font-size:27px;letter-spacing:-.8px;margin:0 0 7px}
+.section-heading p{color:var(--muted);margin:0;font-size:14px}
+.category-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:15px;
+}
+.category-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:17px;padding:20px 16px;min-height:148px;
+  transition:.2s;display:flex;flex-direction:column;gap:11px;
+}
+.category-card:hover{
+  transform:translateY(-4px);border-color:#c8c4ff;
+  box-shadow:var(--shadow);
+}
+.category-icon{
+  width:44px;height:44px;border-radius:13px;
+  display:grid;place-items:center;background:#f0efff;font-size:23px;
+}
+.category-card strong{font-size:14px}
+.category-card small{color:var(--muted);font-size:12px}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.tool-card{
+  background:white;border:1px solid var(--border);
+  border-radius:17px;padding:22px;transition:.2s;
+}
+.tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.tool-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.tool-icon{font-size:25px}
+.tag{font-size:11px;color:var(--green);background:#e9f7f0;padding:6px 9px;border-radius:20px}
+.tool-card h3{font-size:17px;margin:0 0 8px}
+.tool-card p{color:var(--muted);font-size:13px;line-height:1.6;min-height:42px}
+.text-button{
+  border:0;background:none;color:var(--primary);font-weight:750;
+  padding:8px 0 0;
+}
+.page{display:none;padding:42px 0 75px;min-height:65vh}
+.page.active{display:block}
+.back-button{
+  background:white;border:1px solid var(--border);border-radius:10px;
+  padding:10px 14px;margin-bottom:24px;color:var(--muted);
+}
+.page-title{font-size:34px;letter-spacing:-1px;margin:0 0 10px}
+.page-description{color:var(--muted);line-height:1.7;margin:0 0 30px}
+.calculator{
+  max-width:720px;background:white;border:1px solid var(--border);
+  border-radius:20px;padding:27px;box-shadow:var(--shadow);
+}
+.calculator h2{margin:0 0 8px;font-size:23px}
+.calculator>p{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 25px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:13px;font-weight:700}
+.field input,.field select{
+  width:100%;height:45px;border:1px solid var(--border);
+  border-radius:10px;padding:0 12px;background:white;outline:none;
+}
+.field input:focus,.field select:focus{border-color:var(--primary)}
+.calculate-button{
+  width:100%;margin-top:22px;border:0;border-radius:11px;
+  background:var(--primary);color:white;font-weight:750;padding:14px;
+}
+.calculate-button:hover{background:var(--primary-dark)}
+.result{
+  display:none;margin-top:20px;padding:20px;border-radius:13px;
+  background:#f0efff;border:1px solid #e0deff;
+}
+.result.show{display:block}
+.result small{color:var(--muted);font-weight:650}
+.result strong{display:block;font-size:27px;color:var(--primary);margin-top:6px}
+.result p{font-size:13px;color:var(--muted);margin:8px 0 0}
+.empty-state{
+  background:white;border:1px dashed #d6d8e3;border-radius:17px;
+  padding:35px;text-align:center;color:var(--muted);
+}
+.empty-state .big{font-size:35px;margin-bottom:10px}
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:20px}
+.breadcrumb a{color:var(--primary)}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.info-card{padding:22px;background:white;border:1px solid var(--border);border-radius:15px}
+.info-card strong{display:block;margin-bottom:8px}
+.info-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
+footer{background:#172033;color:white;padding:38px 0;margin-top:25px}
+.footer-inner{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+footer p,footer a{color:#aeb6c6;font-size:13px}
+footer a:hover{color:white}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.notice{font-size:12px;color:var(--muted);line-height:1.6;margin-top:20px}
+@media(max-width:850px){
+  .category-grid{grid-template-columns:repeat(3,1fr)}
+  .tools-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .nav{min-height:62px}
+  .menu-button{display:block}
+  .nav-links{
+    display:none;position:absolute;top:62px;left:0;right:0;
+    background:white;padding:20px;flex-direction:column;align-items:flex-start;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-links.open{display:flex}
+  .hero{padding:55px 0 45px}
+  h1{letter-spacing:-1.2px}
+  .hero p{font-size:15px}
+  .section{padding:40px 0}
+  .category-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .category-card{padding:15px;min-height:135px}
+  .tools-grid,.info-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .calculator{padding:20px}
+  .page-title{font-size:28px}
+  .section-heading{align-items:flex-start;flex-direction:column}
+}
+</style>
 </head>
+
 <body>
 
 <header>
   <div class="container nav">
-    <a class="logo" href="#">Outils<span>Gratuits</span>.</a>
-    <nav class="nav-links">
-      <a href="#outils">Tous les outils</a>
-      <a href="#calculateurs">Calculateurs</a>
-      <a href="#faq">Questions fréquentes</a>
+    <a class="logo" href="#/">Outils<span>Gratuits</span></a>
+    <button class="menu-button" id="menuButton" aria-label="Ouvrir le menu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#/">Accueil</a>
+      <a href="#/categories">Catégories</a>
+      <a href="#/outils">Tous les outils</a>
+      <a href="#/apropos">À propos</a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <span class="eyebrow">Simple · Gratuit · Sans inscription</span>
-    <h1>Tous les outils dont vous avez besoin, au même endroit.</h1>
-    <p>Calculez, comparez et estimez facilement vos dépenses et vos projets grâce à nos outils gratuits.</p>
-    <div class="search-wrap">
-      <span class="search-icon">⌕</span>
-      <input id="search" type="search" placeholder="Rechercher un calculateur..." aria-label="Rechercher un calculateur">
-    </div>
-  </div>
-</section>
-
-<main class="container">
-  <section id="outils">
-    <div class="section-heading">
-      <div>
-        <h2>Explorez nos outils</h2>
-        <div class="muted">Choisissez un calculateur pour commencer.</div>
+<main>
+  <div id="homePage" class="page active">
+    <section class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">✦ Des outils simples et gratuits</span>
+        <h1>Tous vos outils gratuits au même endroit</h1>
+        <p>Calculez, convertissez et simplifiez votre quotidien avec des outils en ligne rapides, pratiques et accessibles gratuitement.</p>
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="globalSearch" type="search" placeholder="Rechercher un outil, un calculateur..." autocomplete="off">
+        </div>
       </div>
-      <span class="muted" id="tool-count">9 outils disponibles</span>
-    </div>
+    </section>
 
-    <div class="filters">
-      <button class="filter active" data-category="all">Tous</button>
-      <button class="filter" data-category="maison">Maison</button>
-      <button class="filter" data-category="finance">Finance</button>
-      <button class="filter" data-category="quotidien">Quotidien</button>
-    </div>
+    <section class="section container">
+      <div class="section-heading">
+        <div>
+          <h2>Explorer les catégories</h2>
+          <p>Retrouvez rapidement les outils dont vous avez besoin.</p>
+        </div>
+      </div>
+      <div class="category-grid" id="homeCategories"></div>
+    </section>
 
-    <div class="tools-grid" id="tools-grid">
-      <a class="tool-card" data-category="maison" data-search="peinture mur surface litre travaux" href="#peinture">
-        <div class="tool-icon">🎨</div><h3>Calculateur de peinture</h3>
-        <p>Estimez la quantité de peinture nécessaire pour vos travaux.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="finance" data-search="budget mensuel dépenses revenus argent" href="#budget">
-        <div class="tool-icon">💶</div><h3>Budget mensuel</h3>
-        <p>Calculez vos dépenses et votre argent restant à la fin du mois.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="finance" data-search="pourcentage réduction remise augmentation" href="#pourcentage">
-        <div class="tool-icon">％</div><h3>Pourcentage et réduction</h3>
-        <p>Calculez un pourcentage, une remise ou une augmentation.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="finance" data-search="tva ht ttc taxe prix" href="#tva">
-        <div class="tool-icon">🧾</div><h3>Calculateur de TVA</h3>
-        <p>Passez facilement d'un prix HT à TTC ou inversement.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="quotidien" data-search="essence carburant voiture trajet distance" href="#carburant">
-        <div class="tool-icon">⛽</div><h3>Coût de carburant</h3>
-        <p>Estimez le prix de vos trajets en voiture.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="maison" data-search="électricité consommation puissance kwh facture" href="#electricite">
-        <div class="tool-icon">⚡</div><h3>Consommation électrique</h3>
-        <p>Estimez le coût d'utilisation de vos appareils électriques.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="finance" data-search="prêt crédit emprunt mensualité" href="#pret">
-        <div class="tool-icon">🏠</div><h3>Mensualité de prêt</h3>
-        <p>Estimez vos mensualités selon le montant et la durée du prêt.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="finance" data-search="épargne économies intérêts placement" href="#epargne">
-        <div class="tool-icon">🐷</div><h3>Calculateur d'épargne</h3>
-        <p>Projetez votre épargne avec des versements réguliers.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
-      <a class="tool-card" data-category="quotidien" data-search="conversion unités longueur poids température" href="#conversion">
-        <div class="tool-icon">📐</div><h3>Convertisseur d'unités</h3>
-        <p>Convertissez des longueurs, poids et températures.</p>
-        <span class="tool-link">Utiliser le calculateur →</span>
-      </a>
+    <section class="section container" style="padding-top:0">
+      <div class="section-heading">
+        <div>
+          <h2>Les outils populaires</h2>
+          <p>Nos calculateurs pratiques pour tous les jours.</p>
+        </div>
+        <a href="#/outils" class="text-button">Tous les outils →</a>
+      </div>
+      <div class="tools-grid" id="popularTools"></div>
+    </section>
+
+    <section class="section container">
+      <div class="section-heading">
+        <div>
+          <h2>Pourquoi utiliser Outils Gratuits ?</h2>
+          <p>Des outils accessibles sans complication.</p>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><strong>⚡ Rapide et simple</strong><p>Effectuez vos calculs directement depuis votre navigateur, sans installation.</p></div>
+        <div class="info-card"><strong>🔓 Accessible gratuitement</strong><p>Utilisez les outils disponibles sans créer de compte.</p></div>
+        <div class="info-card"><strong>📱 Adapté à tous les écrans</strong><p>Le site fonctionne sur ordinateur, tablette et téléphone.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section id="categoryPage" class="page">
+    <div class="container">
+      <button class="back-button" onclick="navigate('/')">← Retour à l'accueil</button>
+      <div class="breadcrumb"><a href="#/">Accueil</a> / Catégorie</div>
+      <div id="categoryContent"></div>
     </div>
-    <p class="no-results" id="no-results">Aucun calculateur ne correspond à votre recherche.</p>
   </section>
 
-  <section class="calculators" id="calculateurs">
-    <div class="section-heading">
-      <div><h2>Nos calculateurs gratuits</h2><div class="muted">Remplissez les champs et obtenez votre résultat.</div></div>
+  <section id="allToolsPage" class="page">
+    <div class="container">
+      <button class="back-button" onclick="navigate('/')">← Retour à l'accueil</button>
+      <h1 class="page-title">Tous les outils</h1>
+      <p class="page-description">Retrouvez ici l'ensemble des calculateurs disponibles.</p>
+      <div class="search-wrap" style="margin:0 0 25px">
+        <span class="search-icon">⌕</span>
+        <input id="toolsSearch" type="search" placeholder="Rechercher parmi tous les outils...">
+      </div>
+      <div class="tools-grid" id="allToolsList"></div>
     </div>
-
-    <section class="calculator" id="peinture">
-      <div class="calculator-header"><h3>🎨 Calculateur de peinture</h3><p>Estimez le nombre de litres nécessaires pour peindre une surface.</p></div>
-      <form data-calc="paint">
-        <div class="form-grid">
-          <div class="field"><label for="paint-area">Surface à peindre (m²)</label><input id="paint-area" type="number" min="0" step="any" value="50" required></div>
-          <div class="field"><label for="paint-coats">Nombre de couches</label><input id="paint-coats" type="number" min="1" step="1" value="2" required></div>
-          <div class="field"><label for="paint-coverage">Rendement (m² par litre)</label><input id="paint-coverage" type="number" min="0.01" step="any" value="10" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="budget">
-      <div class="calculator-header"><h3>💶 Calculateur de budget mensuel</h3><p>Visualisez vos dépenses et votre reste à vivre.</p></div>
-      <form data-calc="budget">
-        <div class="form-grid">
-          <div class="field"><label for="income">Revenus mensuels (€)</label><input id="income" type="number" min="0" step="any" value="2200" required></div>
-          <div class="field"><label for="rent">Loyer ou crédit (€)</label><input id="rent" type="number" min="0" step="any" value="700" required></div>
-          <div class="field"><label for="bills">Factures (€)</label><input id="bills" type="number" min="0" step="any" value="150" required></div>
-          <div class="field"><label for="food">Courses (€)</label><input id="food" type="number" min="0" step="any" value="300" required></div>
-          <div class="field"><label for="transport">Transport (€)</label><input id="transport" type="number" min="0" step="any" value="100" required></div>
-          <div class="field"><label for="other">Autres dépenses (€)</label><input id="other" type="number" min="0" step="any" value="100" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer mon budget</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="pourcentage">
-      <div class="calculator-header"><h3>％ Calculateur de pourcentage et réduction</h3><p>Calculez un pourcentage, une remise ou une augmentation.</p></div>
-      <form data-calc="percent">
-        <div class="form-grid">
-          <div class="field"><label for="percent-mode">Type de calcul</label><select id="percent-mode"><option value="part">Calculer X % d'un montant</option><option value="discount">Calculer une réduction</option><option value="increase">Calculer une augmentation</option></select></div>
-          <div class="field"><label for="percent-value">Montant de départ (€ ou valeur)</label><input id="percent-value" type="number" min="0" step="any" value="150" required></div>
-          <div class="field"><label for="percent-rate">Pourcentage (%)</label><input id="percent-rate" type="number" min="0" step="any" value="20" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="tva">
-      <div class="calculator-header"><h3>🧾 Calculateur de TVA</h3><p>Calculez le montant de TVA et le prix hors taxe ou toutes taxes comprises.</p></div>
-      <form data-calc="vat">
-        <div class="form-grid">
-          <div class="field"><label for="vat-mode">Calcul souhaité</label><select id="vat-mode"><option value="ht">Prix HT vers TTC</option><option value="ttc">Prix TTC vers HT</option></select></div>
-          <div class="field"><label for="vat-price">Prix (€)</label><input id="vat-price" type="number" min="0" step="any" value="100" required></div>
-          <div class="field"><label for="vat-rate">Taux de TVA (%)</label><select id="vat-rate"><option value="20">20 % – taux normal</option><option value="10">10 %</option><option value="5.5">5,5 %</option><option value="2.1">2,1 %</option></select></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="carburant">
-      <div class="calculator-header"><h3>⛽ Calculateur de coût de carburant</h3><p>Estimez le budget essence ou diesel d'un trajet.</p></div>
-      <form data-calc="fuel">
-        <div class="form-grid">
-          <div class="field"><label for="fuel-distance">Distance du trajet (km)</label><input id="fuel-distance" type="number" min="0" step="any" value="200" required></div>
-          <div class="field"><label for="fuel-consumption">Consommation (L / 100 km)</label><input id="fuel-consumption" type="number" min="0" step="any" value="6" required></div>
-          <div class="field"><label for="fuel-price">Prix du litre (€)</label><input id="fuel-price" type="number" min="0" step="any" value="1.85" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer le trajet</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="electricite">
-      <div class="calculator-header"><h3>⚡ Calculateur de consommation électrique</h3><p>Estimez le coût d'un appareil selon sa puissance et son utilisation.</p></div>
-      <form data-calc="electric">
-        <div class="form-grid">
-          <div class="field"><label for="electric-power">Puissance de l'appareil (W)</label><input id="electric-power" type="number" min="0" step="any" value="2000" required></div>
-          <div class="field"><label for="electric-hours">Heures d'utilisation par jour</label><input id="electric-hours" type="number" min="0" step="any" value="3" required></div>
-          <div class="field"><label for="electric-days">Nombre de jours</label><input id="electric-days" type="number" min="0" step="any" value="30" required></div>
-          <div class="field"><label for="electric-price">Prix du kWh (€)</label><input id="electric-price" type="number" min="0" step="any" value="0.25" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="pret">
-      <div class="calculator-header"><h3>🏠 Calculateur de mensualité de prêt</h3><p>Estimez une mensualité à partir du capital, du taux annuel et de la durée.</p></div>
-      <form data-calc="loan">
-        <div class="form-grid">
-          <div class="field"><label for="loan-amount">Montant emprunté (€)</label><input id="loan-amount" type="number" min="0" step="any" value="150000" required></div>
-          <div class="field"><label for="loan-rate">Taux annuel (%)</label><input id="loan-rate" type="number" min="0" step="any" value="3.5" required></div>
-          <div class="field"><label for="loan-years">Durée (années)</label><input id="loan-years" type="number" min="1" step="1" value="20" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer la mensualité</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="epargne">
-      <div class="calculator-header"><h3>🐷 Calculateur d'épargne</h3><p>Projetez votre capital avec un versement mensuel et un rendement annuel hypothétique.</p></div>
-      <form data-calc="saving">
-        <div class="form-grid">
-          <div class="field"><label for="saving-start">Épargne de départ (€)</label><input id="saving-start" type="number" min="0" step="any" value="1000" required></div>
-          <div class="field"><label for="saving-monthly">Versement mensuel (€)</label><input id="saving-monthly" type="number" min="0" step="any" value="100" required></div>
-          <div class="field"><label for="saving-rate">Rendement annuel estimé (%)</label><input id="saving-rate" type="number" min="0" step="any" value="3" required></div>
-          <div class="field"><label for="saving-years">Durée (années)</label><input id="saving-years" type="number" min="1" step="1" value="10" required></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Calculer mon épargne</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <section class="calculator" id="conversion">
-      <div class="calculator-header"><h3>📐 Convertisseur d'unités</h3><p>Convertissez des longueurs, des poids et des températures.</p></div>
-      <form data-calc="convert">
-        <div class="form-grid">
-          <div class="field"><label for="convert-type">Type de conversion</label><select id="convert-type"><option value="length">Longueur</option><option value="weight">Poids</option><option value="temperature">Température</option></select></div>
-          <div class="field"><label for="convert-value">Valeur à convertir</label><input id="convert-value" type="number" step="any" value="100" required></div>
-          <div class="field"><label for="convert-from">De</label><select id="convert-from"></select></div>
-          <div class="field"><label for="convert-to">Vers</label><select id="convert-to"></select></div>
-        </div>
-        <div class="actions"><button class="btn" type="submit">Convertir</button><button class="btn secondary" type="reset">Réinitialiser</button></div>
-        <div class="result" aria-live="polite"></div>
-      </form>
-    </section>
   </section>
 
-  <section class="info-section" id="faq">
-    <h2>Questions fréquentes</h2>
-    <h3>Les calculateurs sont-ils gratuits ?</h3>
-    <p>Oui, les outils proposés sur Outils Gratuits sont accessibles gratuitement et sans création de compte.</p>
-    <h3>Dois-je installer une application ?</h3>
-    <p>Non. Les calculateurs fonctionnent directement dans votre navigateur, sur ordinateur, tablette ou téléphone.</p>
-    <h3>Mes données sont-elles enregistrées ?</h3>
-    <p>Les calculs de cette page sont effectués directement dans votre navigateur. Évitez toutefois de saisir des informations confidentielles.</p>
-    <h3>Les résultats sont-ils exacts ?</h3>
-    <p>Les résultats sont des estimations mathématiques. Pour les prêts, l'énergie, les impôts et les autres décisions financières, vérifiez les conditions réelles auprès du professionnel concerné.</p>
+  <section id="toolPage" class="page">
+    <div class="container">
+      <button class="back-button" onclick="history.back()">← Retour</button>
+      <div class="breadcrumb"><a href="#/">Accueil</a> / <span id="toolBreadcrumb"></span></div>
+      <div id="toolContent"></div>
+    </div>
+  </section>
+
+  <section id="aboutPage" class="page">
+    <div class="container">
+      <button class="back-button" onclick="navigate('/')">← Retour à l'accueil</button>
+      <h1 class="page-title">À propos d'Outils Gratuits</h1>
+      <p class="page-description">Outils Gratuits rassemble des calculateurs et des outils pratiques pour faciliter les petites tâches du quotidien.</p>
+      <div class="info-grid">
+        <div class="info-card"><strong>Notre objectif</strong><p>Rendre les calculs courants plus simples et accessibles.</p></div>
+        <div class="info-card"><strong>Notre fonctionnement</strong><p>Les calculs sont réalisés directement dans votre navigateur.</p></div>
+        <div class="info-card"><strong>Notre évolution</strong><p>De nouveaux outils et catégories seront ajoutés progressivement.</p></div>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>
-  <div class="container">
-    © <span id="year"></span> Outils Gratuits – Tous droits réservés.
-    <div style="margin-top:8px">
-      <a href="#outils">Tous les outils</a>
-      <a href="#faq">FAQ</a>
+  <div class="container footer-inner">
+    <div>
+      <a class="logo" href="#/">Outils<span>Gratuits</span></a>
+      <p>Des outils pratiques, gratuits et accessibles en ligne.</p>
+      <p>© <span id="year"></span> Outils Gratuits</p>
+    </div>
+    <div class="footer-links">
+      <a href="#/">Accueil</a>
+      <a href="#/categories">Catégories</a>
+      <a href="#/outils">Outils</a>
+      <a href="#/apropos">À propos</a>
     </div>
   </div>
 </footer>
 
 <script>
-  const money = n => new Intl.NumberFormat("fr-FR", {
-    style: "currency", currency: "EUR"
-  }).format(n);
+const categories = [
+  {id:"finance",name:"Finance et budget",icon:"💰",description:"Gérez votre argent, votre budget et vos projets financiers."},
+  {id:"maison",name:"Maison et travaux",icon:"🏠",description:"Préparez vos travaux et estimez vos besoins en matériaux."},
+  {id:"auto",name:"Auto et transport",icon:"🚗",description:"Calculez vos dépenses de carburant et vos trajets."},
+  {id:"maths",name:"Mathématiques",icon:"➗",description:"Effectuez facilement vos calculs et vos opérations."},
+  {id:"conversions",name:"Conversions",icon:"📏",description:"Convertissez les unités de mesure les plus courantes."},
+  {id:"energie",name:"Énergie et électricité",icon:"⚡",description:"Estimez votre consommation et vos dépenses énergétiques."},
+  {id:"cuisine",name:"Cuisine et alimentation",icon:"🍳",description:"Adaptez vos recettes et calculez vos proportions."},
+  {id:"dates",name:"Dates et temps",icon:"📅",description:"Calculez des durées et des différences entre dates."},
+  {id:"sante",name:"Santé et forme",icon:"❤️",description:"Découvrez des calculateurs informatifs autour de la forme."},
+  {id:"informatique",name:"Informatique et numérique",icon:"💻",description:"Calculez des tailles de fichiers et des durées de transfert."}
+];
 
-  const number = n => new Intl.NumberFormat("fr-FR", {
-    maximumFractionDigits: 2
-  }).format(n);
+const tools = [
+  {id:"budget",name:"Calculateur de budget mensuel",category:"finance",icon:"💳",description:"Calculez ce qu'il vous reste chaque mois après vos dépenses.",fields:[
+    ["revenus","Revenus mensuels (€)",3000],["logement","Logement (€)",900],["courses","Courses (€)",350],["transport","Transport (€)",150],["factures","Factures (€)",200],["other","Autres dépenses (€)",100]],calc:v=>({value:v.revenus-v.logement-v.courses-v.transport-v.factures-v.other,label:"Solde mensuel",detail:"La différence entre vos revenus et vos dépenses."})},
+  {id:"pourcentage",name:"Calculateur de pourcentage",category:"maths",icon:"📊",description:"Calculez un pourcentage, une remise ou une augmentation.",fields:[
+    ["amount","Montant de départ",100],["percent","Pourcentage (%)",20]],calc:v=>({value:v.amount*v.percent/100,label:"Résultat",detail:"Valeur correspondant au pourcentage indiqué."})},
+  {id:"tva",name:"Calculateur de TVA",category:"finance",icon:"🧾",description:"Passez facilement d'un prix HT à un prix TTC.",fields:[
+    ["price","Prix hors taxes (€)",100],["rate","Taux de TVA (%)",20]],calc:v=>({value:v.price*(1+v.rate/100),label:"Prix TTC",detail:"Montant de TVA : "+money(v.price*v.rate/100)})},
+  {id:"peinture",name:"Calculateur de peinture",category:"maison",icon:"🎨",description:"Estimez la quantité de peinture nécessaire pour vos murs.",fields:[
+    ["length","Longueur du mur (m)",5],["height","Hauteur du mur (m)",2.5],["coats","Nombre de couches",2],["coverage","Rendement (m²/L)",10]],calc:v=>({value:(v.length*v.height*v.coats)/v.coverage,label:"Litres de peinture nécessaires",detail:"Estimation pour un mur, hors portes et fenêtres."})},
+  {id:"carburant",name:"Calculateur de carburant",category:"auto",icon:"⛽",description:"Calculez le coût en carburant de vos trajets.",fields:[
+    ["distance","Distance parcourue (km)",250],["consumption","Consommation (L/100 km)",6],["price","Prix du litre (€)",1.8]],calc:v=>({value:v.distance*v.consumption/100*v.price,label:"Coût du trajet",detail:"Carburant estimé : "+(v.distance*v.consumption/100).toFixed(2)+" litres."})},
+  {id:"electricite",name:"Calculateur d'électricité",category:"energie",icon:"💡",description:"Estimez le coût d'utilisation d'un appareil électrique.",fields:[
+    ["power","Puissance de l'appareil (W)",1000],["hours","Heures d'utilisation par jour",3],["days","Nombre de jours",30],["price","Prix du kWh (€)",0.25]],calc:v=>({value:v.power/1000*v.hours*v.days*v.price,label:"Coût estimé",detail:"Consommation : "+(v.power/1000*v.hours*v.days).toFixed(2)+" kWh."})},
+  {id:"credit",name:"Calculateur de crédit",category:"finance",icon:"🏦",description:"Estimez la mensualité d'un emprunt.",fields:[
+    ["capital","Montant emprunté (€)",10000],["rate","Taux annuel (%)",4],["duration","Durée en années",5]],calc:v=>{let n=v.duration*12,r=v.rate/1200;let p=r===0?v.capital/n:v.capital*r/(1-Math.pow(1+r,-n));return {value:p,label:"Mensualité estimée",detail:"Coût total estimé : "+money(p*n)+". Hors assurance et frais éventuels."}}},
+  {id:"epargne",name:"Simulateur d'épargne",category:"finance",icon:"🐷",description:"Projetez votre épargne avec des versements mensuels.",fields:[
+    ["initial","Capital de départ (€)",1000],["monthly","Versement mensuel (€)",100],["rate","Rendement annuel estimé (%)",3],["duration","Durée en années",10]],calc:v=>{let n=v.duration*12,r=Math.pow(1+v.rate/100,1/12)-1;let total=v.initial*Math.pow(1+r,n)+(r===0?v.monthly*n:v.monthly*(Math.pow(1+r,n)-1)/r);return {value:total,label:"Capital final estimé",detail:"Versements effectués : "+money(v.initial+v.monthly*n)+". Rendement non garanti."}}},
+  {id:"conversion",name:"Convertisseur d'unités",category:"conversions",icon:"📐",description:"Convertissez des longueurs, des poids et des températures.",special:true}
+];
 
-  function showResult(form, title, detail = "") {
-    const box = form.querySelector(".result");
-    box.style.display = "block";
-    box.innerHTML = "";
-    const strong = document.createElement("strong");
-    strong.textContent = title;
-    box.appendChild(strong);
-    if (detail) {
-      const small = document.createElement("small");
-      small.textContent = detail;
-      box.appendChild(small);
+function money(n){return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(n)}
+function number(n){return new Intl.NumberFormat("fr-FR",{maximumFractionDigits:3}).format(n)}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function categoryCard(c){
+  const count=tools.filter(t=>t.category===c.id).length;
+  return `<a class="category-card" href="#/categories/${c.id}">
+    <span class="category-icon">${c.icon}</span>
+    <strong>${c.name}</strong>
+    <small>${count} outil${count>1?"s":""} disponible${count>1?"s":""}</small>
+  </a>`;
+}
+function toolCard(t){
+  const c=categories.find(x=>x.id===t.category);
+  return `<article class="tool-card">
+    <div class="tool-top"><span class="tool-icon">${t.icon}</span><span class="tag">Gratuit</span></div>
+    <h3>${t.name}</h3><p>${t.description}</p>
+    <a class="text-button" href="#/outil/${t.id}">Utiliser l'outil →</a>
+  </article>`;
+}
+function renderHome(){
+  document.getElementById("homeCategories").innerHTML=categories.map(categoryCard).join("");
+  document.getElementById("popularTools").innerHTML=tools.slice(0,6).map(toolCard).join("");
+}
+function showPage(id){
+  document.querySelectorAll("main .page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.getElementById("navLinks").classList.remove("open");
+  window.scrollTo(0,0);
+}
+function navigate(path){location.hash="/"+path.replace(/^\/+/,"")}
+function categoryPage(id){
+  const c=categories.find(x=>x.id===id);
+  if(!c){navigate("/");return}
+  const list=tools.filter(t=>t.category===id);
+  document.getElementById("categoryContent").innerHTML=`
+    <div class="section-heading"><div>
+      <div class="category-icon" style="margin-bottom:17px">${c.icon}</div>
+      <h1 class="page-title">${c.name}</h1>
+      <p class="page-description">${c.description}</p>
+    </div></div>
+    ${list.length?`<div class="tools-grid">${list.map(toolCard).join("")}</div>`:
+    `<div class="empty-state"><div class="big">${c.icon}</div><strong>Les outils arrivent bientôt !</strong><p>Cette catégorie sera enrichie avec de nouveaux calculateurs.</p></div>`}
+    <div style="margin-top:38px"><h2>Autres catégories</h2><div class="category-grid">${categories.filter(x=>x.id!==id).map(categoryCard).join("")}</div></div>`;
+  showPage("categoryPage");
+}
+function renderAllTools(query=""){
+  const q=query.trim().toLowerCase();
+  const found=tools.filter(t=>(t.name+" "+t.description+" "+t.category).toLowerCase().includes(q));
+  document.getElementById("allToolsList").innerHTML=found.length?found.map(toolCard).join(""):`<div class="empty-state" style="grid-column:1/-1">Aucun outil trouvé. Essayez une autre recherche.</div>`;
+}
+function fieldHTML(field){
+  return `<div class="field"><label for="f_${field[0]}">${field[1]}</label><input id="f_${field[0]}" type="number" min="0" step="any" value="${field[2]}" required></div>`;
+}
+function openTool(id){
+  const t=tools.find(x=>x.id===id);
+  if(!t){navigate("/");return}
+  const c=categories.find(x=>x.id===t.category);
+  document.getElementById("toolBreadcrumb").textContent=c.name;
+  let content=`<h1 class="page-title">${t.icon} ${t.name}</h1><p class="page-description">${t.description}</p>`;
+  if(t.special){
+    content+=`<div class="calculator"><h2>Convertisseur d'unités</h2><p>Choisissez une catégorie, saisissez une valeur et sélectionnez les unités.</p>
+    <div class="form-grid">
+      <div class="field"><label for="convType">Type de conversion</label><select id="convType"><option value="length">Longueur</option><option value="weight">Poids</option><option value="temp">Température</option></select></div>
+      <div class="field"><label for="convValue">Valeur à convertir</label><input type="number" id="convValue" value="1" step="any"></div>
+      <div class="field"><label for="convFrom">De</label><select id="convFrom"></select></div>
+      <div class="field"><label for="convTo">Vers</label><select id="convTo"></select></div>
+    </div><button class="calculate-button" onclick="convertUnits()">Convertir</button>
+    <div class="result" id="convResult"><small>Résultat</small><strong id="convOutput"></strong></div></div>`;
+  }else{
+    content+=`<div class="calculator"><h2>Effectuer votre calcul</h2><p>Renseignez les valeurs ci-dessous puis cliquez sur calculer.</p>
+      <div class="form-grid">${t.fields.map(fieldHTML).join("")}</div>
+      <button class="calculate-button" onclick="calculate('${t.id}')">Calculer maintenant</button>
+      <div class="result" id="resultBox"><small id="resultLabel">Résultat</small><strong id="resultValue"></strong><p id="resultDetail"></p></div>
+    </div>`;
+  }
+  document.getElementById("toolContent").innerHTML=content;
+  showPage("toolPage");
+  if(t.special)updateConversionOptions();
+}
+function calculate(id){
+  const t=tools.find(x=>x.id===id);
+  const values={};
+  for(const f of t.fields){
+    const input=document.getElementById("f_"+f[0]);
+    const value=Number(input.value);
+    if(input.value.trim()===""||!Number.isFinite(value)||value<0){
+      input.focus();alert("Veuillez saisir une valeur valide pour tous les champs.");return;
     }
+    values[f[0]]=value;
   }
-
-  function read(form, id) {
-    const input = form.querySelector("#" + id);
-    const value = Number(input.value);
-    if (input.value.trim() === "" || !Number.isFinite(value) || value < 0) {
-      throw new Error("Vérifiez les valeurs saisies : elles doivent être positives ou nulles.");
-    }
-    return value;
-  }
-
-  document.querySelectorAll("form[data-calc]").forEach(form => {
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      try {
-        const type = form.dataset.calc;
-
-        if (type === "paint") {
-          const area = read(form, "paint-area");
-          const coats = read(form, "paint-coats");
-          const coverage = read(form, "paint-coverage");
-          if (coats < 1 || coverage <= 0) throw new Error("Le nombre de couches et le rendement doivent être supérieurs à zéro.");
-          const liters = area * coats / coverage * 1.1;
-          showResult(form, number(liters) + " litres environ", "Marge de 10 % incluse pour les imprévus.");
-        }
-
-        if (type === "budget") {
-          const income = read(form, "income");
-          const expenses = ["rent","bills","food","transport","other"].reduce((sum,id) => sum + read(form,id),0);
-          const remaining = income - expenses;
-          const ratio = income > 0 ? expenses / income * 100 : 0;
-          showResult(form, money(remaining) + " restants", "Dépenses : " + money(expenses) + " · Revenus : " + money(income) + " · Part des revenus dépensée : " + number(ratio) + " %.");
-        }
-
-        if (type === "percent") {
-          const mode = form.querySelector("#percent-mode").value;
-          const value = read(form,"percent-value");
-          const rate = read(form,"percent-rate");
-          const amount = value * rate / 100;
-          if (mode === "part") showResult(form, number(amount), rate + " % de " + number(value) + ".");
-          if (mode === "discount") showResult(form, money(value - amount), "Réduction : " + money(amount) + " · Prix initial : " + money(value) + ".");
-          if (mode === "increase") showResult(form, money(value + amount), "Augmentation : " + money(amount) + " · Valeur initiale : " + money(value) + ".");
-        }
-
-        if (type === "vat") {
-          const mode = form.querySelector("#vat-mode").value;
-          const price = read(form,"vat-price");
-          const rate = read(form,"vat-rate");
-          const tax = rate / 100;
-          if (mode === "ht") {
-            showResult(form, "Prix TTC : " + money(price * (1 + tax)), "Prix HT : " + money(price) + " · TVA : " + money(price * tax) + ".");
-          } else {
-            const ht = price / (1 + tax);
-            showResult(form, "Prix HT : " + money(ht), "Prix TTC : " + money(price) + " · TVA : " + money(price - ht) + ".");
-          }
-        }
-
-        if (type === "fuel") {
-          const distance = read(form,"fuel-distance");
-          const consumption = read(form,"fuel-consumption");
-          const price = read(form,"fuel-price");
-          const liters = distance * consumption / 100;
-          showResult(form, money(liters * price), "Carburant estimé : " + number(liters) + " litres pour " + number(distance) + " km.");
-        }
-
-        if (type === "electric") {
-          const power = read(form,"electric-power");
-          const hours = read(form,"electric-hours");
-          const days = read(form,"electric-days");
-          const price = read(form,"electric-price");
-          const kwh = power / 1000 * hours * days;
-          showResult(form, money(kwh * price), "Consommation estimée : " + number(kwh) + " kWh sur " + number(days) + " jours.");
-        }
-
-        if (type === "loan") {
-          const amount = read(form,"loan-amount");
-          const annualRate = read(form,"loan-rate") / 100;
-          const years = read(form,"loan-years");
-          if (amount <= 0 || years <= 0) throw new Error("Le montant et la durée doivent être supérieurs à zéro.");
-          const months = years * 12;
-          const rate = annualRate / 12;
-          const payment = rate === 0 ? amount / months : amount * rate / (1 - Math.pow(1 + rate, -months));
-          showResult(form, money(payment) + " / mois", "Total remboursé estimé : " + money(payment * months) + " · Hors assurance et frais.");
-        }
-
-        if (type === "saving") {
-          const start = read(form,"saving-start");
-          const monthly = read(form,"saving-monthly");
-          const annualRate = read(form,"saving-rate") / 100;
-          const years = read(form,"saving-years");
-          if (years <= 0) throw new Error("La durée doit être supérieure à zéro.");
-          const months = years * 12;
-          const rate = Math.pow(1 + annualRate, 1/12) - 1;
-          const growth = rate === 0 ? months : (Math.pow(1 + rate, months) - 1) / rate;
-          const capital = start * Math.pow(1 + rate, months) + monthly * growth;
-          const deposits = start + monthly * months;
-          showResult(form, money(capital), "Versements cumulés : " + money(deposits) + " · Gain théorique : " + money(capital - deposits) + ". Hors fiscalité et frais. Rendement non garanti.");
-        }
-
-        if (type === "convert") {
-          const kind = form.querySelector("#convert-type").value;
-          const value = Number(form.querySelector("#convert-value").value);
-          const from = form.querySelector("#convert-from").value;
-          const to = form.querySelector("#convert-to").value;
-          if (!Number.isFinite(value)) throw new Error("Saisissez une valeur valide.");
-          let result;
-
-          if (kind === "length") {
-            const factors = {mm:.001, cm:.01, m:1, km:1000};
-            result = value * factors[from] / factors[to];
-          } else if (kind === "weight") {
-            const factors = {g:1, kg:1000, t:1000000};
-            result = value * factors[from] / factors[to];
-          } else {
-            const celsius = from === "C" ? value : (value - 32) * 5/9;
-            result = to === "C" ? celsius : celsius * 9/5 + 32;
-          }
-          showResult(form, number(result) + " " + to, number(value) + " " + from + " converti en " + to + ".");
-        }
-      } catch (error) {
-        const box = form.querySelector(".result");
-        box.style.display = "block";
-        box.textContent = error.message;
-        box.style.background = "#fff2f0";
-        box.style.borderColor = "#ffd6d1";
-        box.style.color = "#b42318";
-      }
-    });
-
-    form.addEventListener("reset", () => {
-      setTimeout(() => {
-        const box = form.querySelector(".result");
-        box.style.display = "none";
-        box.style.background = "";
-        box.style.borderColor = "";
-        box.style.color = "";
-      }, 0);
-    });
+  if(id==="credit"&&values.duration===0){alert("La durée doit être supérieure à zéro.");return}
+  if(id==="peinture"&&values.coverage===0){alert("Le rendement doit être supérieur à zéro.");return}
+  if(id==="epargne"&&values.duration===0){alert("La durée doit être supérieure à zéro.");return}
+  if(id==="electricite"&&values.price===0){/* Un tarif nul reste autorisé */}
+  if(id==="tva"&&values.rate>100){alert("Vérifiez le taux de TVA.");return}
+  const r=t.calc(values);
+  document.getElementById("resultLabel").textContent=r.label;
+  document.getElementById("resultValue").textContent=money(r.value);
+  document.getElementById("resultDetail").textContent=r.detail;
+  document.getElementById("resultBox").classList.add("show");
+}
+const units={
+  length:{m:1,km:1000,cm:.01,mm:.001,mi:1609.344,ft:.3048},
+  weight:{kg:1,g:.001,mg:.000001,t:1000,lb:.45359237},
+  temp:{C:"C",F:"F",K:"K"}
+};
+const unitNames={m:"Mètres",km:"Kilomètres",cm:"Centimètres",mm:"Millimètres",mi:"Miles",ft:"Pieds",kg:"Kilogrammes",g:"Grammes",mg:"Milligrammes",t:"Tonnes",lb:"Livres",C:"Celsius",F:"Fahrenheit",K:"Kelvin"};
+function updateConversionOptions(){
+  const type=document.getElementById("convType").value;
+  const keys=Object.keys(units[type]);
+  ["convFrom","convTo"].forEach((id,index)=>{
+    document.getElementById(id).innerHTML=keys.map(k=>`<option value="${k}" ${index===1&&k===keys[1]?"selected":""}>${unitNames[k]}</option>`).join("");
   });
-
-  const unitOptions = {
-    length: [["mm","Millimètres"],["cm","Centimètres"],["m","Mètres"],["km","Kilomètres"]],
-    weight: [["g","Grammes"],["kg","Kilogrammes"],["t","Tonnes"]],
-    temperature: [["C","Celsius"],["F","Fahrenheit"]]
-  };
-
-  function updateUnits() {
-    const form = document.querySelector('[data-calc="convert"]');
-    const kind = form.querySelector("#convert-type").value;
-    ["convert-from","convert-to"].forEach((id,index) => {
-      const select = form.querySelector("#" + id);
-      select.innerHTML = "";
-      unitOptions[kind].forEach(([value,label]) => {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = label;
-        select.appendChild(option);
-      });
-      select.selectedIndex = index === 0 ? 0 : Math.min(1, unitOptions[kind].length - 1);
-    });
+}
+function convertUnits(){
+  const type=document.getElementById("convType").value;
+  const value=Number(document.getElementById("convValue").value);
+  const from=document.getElementById("convFrom").value;
+  const to=document.getElementById("convTo").value;
+  if(!Number.isFinite(value)){alert("Veuillez saisir une valeur valide.");return}
+  let result;
+  if(type==="temp"){
+    let c=from==="C"?value:from==="F"?(value-32)*5/9:value-273.15;
+    result=to==="C"?c:to==="F"?c*9/5+32:c+273.15;
+  }else result=value*units[type][from]/units[type][to];
+  document.getElementById("convOutput").textContent=number(result)+" "+unitNames[to];
+  document.getElementById("convResult").classList.add("show");
+}
+function route(){
+  const path=decodeURIComponent(location.hash.slice(1)||"/").replace(/\/$/,"")||"/";
+  if(path==="/"){showPage("homePage");return}
+  if(path==="/categories"){
+    document.getElementById("categoryContent").innerHTML=`<h1 class="page-title">Toutes les catégories</h1><p class="page-description">Choisissez une catégorie pour découvrir ses outils.</p><div class="category-grid">${categories.map(categoryCard).join("")}</div>`;
+    showPage("categoryPage");return;
   }
-
-  document.querySelector("#convert-type").addEventListener("change", updateUnits);
-  updateUnits();
-
-  const search = document.querySelector("#search");
-  const cards = [...document.querySelectorAll(".tool-card")];
-  const filters = [...document.querySelectorAll(".filter")];
-  let activeCategory = "all";
-
-  function filterTools() {
-    const query = search.value.toLowerCase().trim();
-    let visible = 0;
-    cards.forEach(card => {
-      const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
-      const matchesSearch = (card.innerText + " " + card.dataset.search).toLowerCase().includes(query);
-      const show = matchesCategory && matchesSearch;
-      card.style.display = show ? "" : "none";
-      if (show) visible++;
-    });
-    document.querySelector("#no-results").style.display = visible ? "none" : "block";
-    document.querySelector("#tool-count").textContent = visible + " outil(s) affiché(s)";
-  }
-
-  search.addEventListener("input", filterTools);
-  filters.forEach(button => {
-    button.addEventListener("click", () => {
-      activeCategory = button.dataset.category;
-      filters.forEach(item => item.classList.toggle("active", item === button));
-      filterTools();
-    });
-  });
-
-  document.querySelector("#year").textContent = new Date().getFullYear();
+  if(path.startsWith("/categories/")){categoryPage(path.split("/")[2]);return}
+  if(path==="/outils"){renderAllTools();showPage("allToolsPage");return}
+  if(path.startsWith("/outil/")){openTool(path.split("/")[2]);return}
+  if(path==="/apropos"){showPage("aboutPage");return}
+  navigate("/");
+}
+document.getElementById("globalSearch").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase();
+  if(q.length<2)return;
+  const found=tools.filter(t=>(t.name+" "+t.description+" "+t.category).toLowerCase().includes(q));
+  document.getElementById("popularTools").innerHTML=found.length?found.map(toolCard).join(""):`<div class="empty-state" style="grid-column:1/-1">Aucun outil trouvé.</div>`;
+});
+document.getElementById("toolsSearch").addEventListener("input",e=>renderAllTools(e.target.value));
+document.getElementById("menuButton").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
+window.addEventListener("hashchange",route);
+document.getElementById("year").textContent=new Date().getFullYear();
+renderHome();
+route();
 </script>
 </body>
 </html>
